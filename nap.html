@@ -170,7 +170,20 @@
         console.error(err);
       });
     }
-  </script>
 
+  <script>
+  function selectKC(value) {
+    // Bỏ chọn tất cả
+    document.querySelectorAll('.kc-item').forEach(el => el.classList.remove('border-2', 'border-yellow-400'));
+    // Thêm viền chọn
+    event.currentTarget.classList.add('border-2', 'border-yellow-400');
+
+    // Gán mệnh giá vào ô chọn mệnh giá
+    const select = document.querySelector('select[name="menhgia"]');
+    if (select) {
+      select.value = value;
+    }
+  }
+</script>
 </body>
 </html>
