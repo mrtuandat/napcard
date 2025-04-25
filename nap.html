@@ -126,8 +126,8 @@
       }
 
       const request_id = Date.now().toString();
-      const partner_id = "3bdf47efbc115edcb89f54f88f5aedf5";
-      const partner_key = "partnerkey"; // Nhớ thay bằng key thực tế
+      const partner_id = "10338158800";
+      const partner_key = "3bdf47efbc115edcb89f54f88f5aedf5"; // Nhớ thay bằng key thực tế
       const raw_sign = partner_id + telco + amount + pin + serial + request_id + partner_key;
       const sign = await md5(raw_sign);
 
