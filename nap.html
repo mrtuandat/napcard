@@ -114,48 +114,67 @@
   <!-- Script xử lý -->
   <script>
     async function submitCard() {
-      const telco = document.getElementById("card_type").value;
-      const amount = document.getElementById("amount").value;
-      const pin = document.getElementById("pin").value.trim();
-      const serial = document.getElementById("serial").value.trim();
-      const game_id = document.getElementById("game_id").value.trim();
+  const telco = document.getElementById("card_type").value;
+  const amount = document.getElementById("amount").value;
+  const pin = document.getElementById("pin").value.trim();
+  const serial = document.getElementById("serial").value.trim();
+  const game_id = document.getElementById("game_id").value.trim();
 
-      if (!pin || !serial || !game_id) {
-        showNotify("Vui lòng nhập đầy đủ thông tin!", false);
-        return;
+  // Kiểm tra các trường có giá trị hay không
+  if (!pin || !serial || !game_id) {
+    showNotify("Vui lòng nhập đầy đủ thông tin!", false);
+    return;
+  }
+
+  // Kiểm tra định dạng mã thẻ (pin) và số seri (serial)
+  const pinRegex = /^[0-9]{10,16}$/; // Ví dụ mẫu mã thẻ: chỉ chấp nhận số, từ 10-16 ký tự
+  const serialRegex = /^[0-9]{10,16}$/; // Ví dụ mẫu seri: chỉ chấp nhận số, từ 10-16 ký tự
+  if (!pinRegex.test(pin)) {
+    showNotify("Mã thẻ không đúng định dạng! Vui lòng kiểm tra lại.", false);
+    return;
+  }
+  if (!serialRegex.test(serial)) {
+    showNotify("Số seri không đúng định dạng! Vui lòng kiểm tra lại.", false);
+    return;
+  }
+
+  // Tạo payload và gửi yêu cầu nếu dữ liệu hợp lệ
+  const request_id = Date.now().toString();
+  const partner_id = "10338158800";
+  const partner_key = "3bdf47efbc115edcb89f54f88f5aedf5"; // Nhớ thay bằng key thực tế
+  const raw_sign = partner_id + telco + amount + pin + serial + request_id + partner_key;
+  const sign = await md5(raw_sign);
+
+  const payload = {
+    telco,
+    amount,
+    code: pin,
+    serial,
+    request_id,
+    partner_id,
+    sign,
+    command: "charging",
+  };
+
+  fetch("https://api.doithe1s.vn/chargingws/v2", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.status === 1) {
+        showNotify("Gửi thẻ thành công! Vui lòng chờ kiểm tra...", true);
+      } else {
+        showNotify("Thẻ không hợp lệ hoặc lỗi hệ thống!", false);
       }
-
-      const request_id = Date.now().toString();
-      const partner_id = "10338158800";
-      const partner_key = "3bdf47efbc115edcb89f54f88f5aedf5"; // Nhớ thay bằng key thực tế
-      const raw_sign = partner_id + telco + amount + pin + serial + request_id + partner_key;
-      const sign = await md5(raw_sign);
-
-      const payload = {
-        telco, amount, code: pin, serial, request_id,
-        partner_id, sign, command: "charging"
-      };
-
-      fetch("https://api.doithe1s.vn/chargingws/v2", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 1) {
-          showNotify("Gửi thẻ thành công! Vui lòng chờ kiểm tra...", true);
-        } else {
-          showNotify("Thẻ không hợp lệ hoặc lỗi hệ thống!", false);
-        }
-        console.log(data);
-      })
-      .catch(err => {
-        showNotify("Có lỗi xảy ra khi gửi yêu cầu!", false);
-        console.error(err);
-      });
-    }
-
+      console.log(data);
+    })
+    .catch((err) => {
+      showNotify("Có lỗi xảy ra khi gửi yêu cầu!", false);
+      console.error(err);
+    });
+}
     function showNotify(msg, success = true) {
       const el = document.getElementById("notify");
       el.textContent = msg;
